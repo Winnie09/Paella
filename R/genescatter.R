@@ -31,6 +31,6 @@ genescatter <- function(mat,genefit,paella,gene=rownames(genefit[[1]])[1:6],ncol
   ld$pt <- as.numeric(sub('.*:','',ld[,2]))
   ld$path <- sub(':.*','',ld$Var2)
   
-  ggplot() + geom_point(data=pd,aes(x=pt,y=value,col=path),size=0.1) + geom_line(data=ld,aes(x=pt,y=value,col=path),size=1.5) + facet_wrap(~Var1,scales = 'free_y',ncol=ncol) + theme_classic() + scale_color_manual(values=brewer.pal(length(unique(paella$cluster)),'Set1')) + xlab('Pseudotime') + ylab('Expression')
+  ggplot() + geom_point(data=pd,aes(x=pt,y=value,col=path),size=0.1) + geom_line(data=ld,aes(x=pt,y=value,col=path),size=1.5) + facet_wrap(~Var1,scales = 'free_y',ncol=ncol) + theme_classic() + scale_color_manual(values=brewer.pal(length(unique(paella$cluster)),'Set1')) + xlab('Pseudotime') + ylab('Expression') + theme(legend.title=element_blank())
 }
 

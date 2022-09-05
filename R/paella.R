@@ -373,7 +373,7 @@ paella <- function(pt,cd,ncores=1,mode=c('both','small','large'),seed=10) {
       ord <- c(ord,colnames(tmp)[which(tmp==min(tmp),arr.ind=T)[1,2]])
     }
     for (i in 1:length(ord)) {
-      final$cluster[final$cluster==ord[i]] <- paste0('part',i)
+      final$cluster[final$cluster==ord[i]] <- paste0('traj',i)
     }
   }
   
