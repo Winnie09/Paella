@@ -1,0 +1,102 @@
+---
+title: 'Decomposing spatial heterogeneity of cell development trajectories with Paella'
+author:
+- Wenpin Hou, Department of Biostatistics, Columbia University Mailman School of Public Health
+- Zhicheng Ji, Department of Biostatistics and Bioinformatics, Duke University School
+  of Medicine
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introductions
+
+Pseudotime trajectory analysis infers the underlying continuous biological process by computationally ordering cells based on their molecular profiles measured in single-cell sequencing studies. Spatial transcriptomics measure both the gene expression and spatial locations of cells, thus providing opportunity to study the spatial heterogeneity of continuous biolgoical processes.
+
+Paella is a computational method that decomposes the pseudotime cell trajectory given by the user into multiple spatial sub-trajectories that are both temporal and spatial continuous. It provides utilities to identify genes with differential expression patterns across spatial sub-trajectories and visualize the gene expressino patterns.
+
+
+## Load packages
+
+```{r,message=FALSE}
+library(Paella)
+```
+
+## Breast cancer Visium spatial transcriptomics example
+
+In this vignette, we demonstrate Paella using a breast cancer Visium spatial transcriptomics example. We manually annotated six in situ carcinoma and defined cell trajectories by the distance of each spot to the closest center of in situ carcinoma. For demonstration purposes, we only included 100 genes randomly selected from the original full gene expression matrix.
+
+Below we read in the three inputs required by Paella: pseudotime already identified by user, spatial coordinates of cell/spots, and gene expression matrix
+
+```{r}
+# Read in pseudotime data
+pt <- readRDS(paste0(system.file('data',package = 'Paella'),'/pt.rds'))
+head(pt)
+# Read in spatial coordinates
+cd <- readRDS(paste0(system.file('data',package = 'Paella'),'/cd.rds'))
+head(cd)
+# Read in gene expression matrix
+mat <- readRDS(paste0(system.file('data',package = 'Paella'),'/expr.rds'))
+str(mat)
+```
+## Running Paella
+We run Paella to identify spatial sub-trajectories, which returns a list. The first element of the list stores the identities of spatial sub-trajectories.
+```{r}
+paellares <- paella(pt,cd)
+table(paellares[[1]])
+```
+
+The spatial sub-trajectories can be visualized using the below command
+```{r,warning=F}
+spatialplot(paellares)
+```
+
+
+## Differential analysis
+
+We next identify genes that have differential temporal gene expression patterns across spatial sub-trajectories. The result is a data.frame containing FDR and pvalues for three types of differential tests: overall, mean change, and trend change. The final column summarizes the type of differential.
+
+```{r}
+diff <- difftest(mat,paellares)
+head(diff)
+```
+Get a list of all overall differential genes:
+
+```{r}
+siggene <- rownames(diff)[diff$Overall_FDR < 0.05]
+```
+
+
+## Visulize the expression of differential genes
+
+We first get a smooth fit of temporal gene expression dynamics for the differential genes. The fit is done using mgcv package.
+```{r}
+genefit <- genefit(mat,paellares,siggene)
+```
+
+Next we assign genes into multiple clusters. If no cluster number is given, findPC is used to automatically determine number of clusters. The first element of geneclu stores the cluster assignments.
+```{r}
+geneclu <- clustergene(genefit)			
+head(geneclu[[1]])
+```
+
+Finally we visualize the temporal expression patterns of differential genes using a heatmap:
+```{r}
+geneheatmap(genefit,geneclu,diff)	
+```
+
+We can also visualize the top six genes using scatterplots
+```{r}
+genescatter(mat,genefit,paellares)
+```
+
+
+## Session Info
+```{r}
+sessionInfo()
+```

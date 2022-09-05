@@ -1,0 +1,15 @@
+Package: Paella
+Type: Package
+Title: Spatial decomposition of cell trajectories
+Version: 1.0
+Date: 2022-08-30
+Author: Wenpin Hou, Zhicheng Ji
+Maintainer: Wenpin Hou <wh2526@cumc.columbia.edu>
+Description: Paella decomposes spatial heterogeneity of cell development trajectories
+Encoding: UTF-8
+License: MIT
+VignetteBuilder: knitr
+Imports: ComplexHeatmap, Matrix, RColorBrewer, circlize, findPC, geometry, ggplot2, igraph, mgcv, parallel, reshape2, sp
+Suggests: knitr
+Depends: R (>= 3.5.0)
+RoxygenNote: 7.1.1
