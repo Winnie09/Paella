@@ -1,30 +1,30 @@
-Palo: Spatially-aware color palette optimization for single-cell and spatial data
+Paella: Decomposing spatial heterogeneity of cell trajectories
 ====
 
 ## Overview
-In the exploratory data analysis of single-cell or spatial genomic data, single cells or spatial spots are often visualized using a two-dimensional plot where each cluster is marked with a different color. With tens of clusters, current visualization methods will often result in visually similar colors assigned to spatially neighbouring clusters, making it hard to distinguish and identify the boundary between clusters. To address this issue, we developed `Palo` that optimizes the color palette assignment for single-cell and spatial data in a spatially aware manner. `Palo` identifies pairs of clusters that are spatially neighbouring to each other, and assigns visually different colors to those neighbouring clusters. We demonstrate that `Palo` results in better visualization in real single-cell and spatial genomic datasets. 
+Spatial transcriptomics provides a unique opportunity to study continuous biological processes in a spatial context. We developed Paella, a computational method to decompose a cell trajectory into multiple spatial sub-trajectories and identify genes with differential temporal patterns across spatial sub-trajectories. Applied to cancer spatial transcriptomics datasets, Paella identified spatially varying genes associated with tumor progression, providing insights into the spatial heterogeneity of cancer development.
 
 
-## Palo Installation
+## Paella Installation
 
-`Palo` software can be installed via Github.
-Users should have R installed on their computer before installing `Palo. R` can be downloaded here: http://www.r-project.org/.
-To install the latest version of `Palo` package via Github, run following commands in R:
+`Paella` software can be installed via Github.
+Users should have R installed on their computer before installing `Paella. R` can be downloaded here: http://www.r-project.org/.
+To install the latest version of `Paella` package via Github, run following commands in R:
 ```{r }
 if (!require("devtools"))
   install.packages("devtools")
-devtools::install_github("Winnie09/Palo")
+devtools::install_github("Winnie09/Paella")
 ```
 
 ## User Manual
-Please visit this webpage for the user manual: https://winnie09.github.io/Wenpin_Hou/pages/Palo.html
+Please visit this webpage for the user manual: https://winnie09.github.io/Wenpin_Hou/pages/Paella.html
 
 ## Contact the Author
 Author: Wenpin Hou, Zhicheng Ji
 
 Report bugs and provide suggestions by sending email to:
 
-Maintainer: Wenpin Hou (whou10@jhu.edu)
+Maintainer: Wenpin Hou (wh2526@cumc.columbia.edu), Zhicheng Ji (zhicheng.ji@duke.edu)
 
 Or open a new issue on this Github page
 
