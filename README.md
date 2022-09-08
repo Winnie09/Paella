@@ -1,7 +1,7 @@
 Paella: Decomposing spatial heterogeneity of cell trajectories
 ====
 
-<img src="https://github.com/Winnie09/Paella/blob/master/vignettes/logo.png"  width = "220">
+<img src="https://github.com/Winnie09/Paella/blob/master/vignettes/logo.png"  width = "150">
 
 ## Overview
 Spatial transcriptomics provides a unique opportunity to study continuous biological processes in a spatial context. We developed Paella, a computational method to decompose a cell trajectory into multiple spatial sub-trajectories and identify genes with differential temporal patterns across spatial sub-trajectories. Applied to cancer spatial transcriptomics datasets, Paella identified spatially varying genes associated with tumor progression, providing insights into the spatial heterogeneity of cancer development.
